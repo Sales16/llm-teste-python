@@ -4,6 +4,7 @@ from factory import ModelFactory
 from command import QueryModelCommand
 from strategy import StrategySelector
 from observer import Observable, ResultObserver
+from error_handler import handle_api_errors, process_responses
 
 def setup_logger():
     """Configura o sistema de logs."""
@@ -61,51 +62,30 @@ def main():
                 logging.info("Usuário encerrou o chat.")
                 break
 
-            chatgpt_response, llama_response = None, None
-            chatgpt_error, llama_error = None, None
+            chatgpt_command = QueryModelCommand(chatgpt, chatgpt_history + [{"role": "user", "content": prompt}])
+            llama_command = QueryModelCommand(llama3, llama_history + [{"role": "user", "content": prompt}])
 
-            try:
-                chatgpt_command = QueryModelCommand(chatgpt, chatgpt_history + [{"role": "user", "content": prompt}])
-                chatgpt_response = chatgpt_command.execute()
-                chatgpt_history.append({"role": "assistant", "content": chatgpt_response})
-            except Exception as e:
-                chatgpt_error = str(e)
-                logging.error(f"Erro com ChatGPT: {chatgpt_error}")
+            chatgpt_response, llama_response, chatgpt_error, llama_error = handle_api_errors(
+                chatgpt_command, llama_command, chatgpt_history, llama_history
+            )
 
-            try:
-                llama3_command = QueryModelCommand(llama3, llama_history + [{"role": "user", "content": prompt}])
-                llama_response = llama3_command.execute()
-                llama_history.append({"role": "assistant", "content": llama_response})
-            except Exception as e:
-                llama_error = str(e)
-                logging.error(f"Erro com Llama3: {llama_error}")
+            result = process_responses(strategy, chatgpt_response, llama_response, chatgpt_error, llama_error)
 
-            if chatgpt_response and llama_response:
-                best_response = strategy.evaluate(chatgpt_response, llama_response)
-                chosen_model = "ChatGPT" if best_response == chatgpt_response else "Llama3"
+            if result["status"] == "success":
+                observable.notify_observers(f"Resposta escolhida pelo modelo: {result['model']}")
+                print(f"\nResposta escolhida ({result['model']}): {result['response']}")
+                logging.info(f"Resposta escolhida: {result['response']}")
 
-                observable.notify_observers(f"Resposta escolhida pelo modelo: {chosen_model}")
-
-                print(f"\nResposta escolhida ({chosen_model}): {best_response}")
-                logging.info(f"Resposta escolhida: {best_response}")
-
-            elif chatgpt_response:
-                print("\nNota: Ocorreu um erro com Llama3. Usando a resposta do ChatGPT.")
-                print(f"Erro: {llama_error}")
-                print(f"Resposta (ChatGPT): {chatgpt_response}")
-                logging.warning(f"Erro com Llama3. Resposta do ChatGPT usada: {chatgpt_response}")
-
-            elif llama_response:
-                print("\nNota: Ocorreu um erro com ChatGPT. Usando a resposta do Llama3.")
-                print(f"Erro: {chatgpt_error}")
-                print(f"Resposta (Llama3): {llama_response}")
-                logging.warning(f"Erro com ChatGPT. Resposta do Llama3 usada: {llama_response}")
+            elif result["status"] == "fallback":
+                print(f"\nNota: Ocorreu um erro com outra API. Usando a resposta do {result['model']}.")
+                print(f"Erro: {result['error']}")
+                print(f"Resposta ({result['model']}): {result['response']}")
+                logging.warning(f"Fallback usado: {result['response']} (Erro: {result['error']})")
 
             else:
                 print("\nErro crítico: Nenhuma API retornou uma resposta.")
-                print(f"Erro ChatGPT: {chatgpt_error}")
-                print(f"Erro Llama3: {llama_error}")
-                logging.critical(f"Falha em ambas as APIs: ChatGPT ({chatgpt_error}), Llama3 ({llama_error})")
+                print(f"Erro: {result['error']}")
+                logging.critical(f"Falha em ambas as APIs: {result['error']}")
 
     except Exception as critical_error:
         logging.critical(f"Erro crítico: {critical_error}")

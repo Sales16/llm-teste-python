@@ -20,3 +20,31 @@ A raquete elétrica é uma ferramenta básica para os engenheiros e técnicos que tr
 
 A raquete elétrica é composta por um cabo flexível com um terminal na ponta que é usado para fazer contato com o circuito elétrico e detectar a presença de corrente elétrica. Quando a raquete é aproximada de um circuito elétrico funcionando normalmente, não detecta nada. Mas quando encontra uma falha ou defeito, a raquete sinaliza a presença da corrente elétrica com um leve toque ou um aviso sonoro, indicando a localização da falha.
 2025-01-25 18:04:17,297 - INFO - Usuário encerrou o chat.
+2025-01-25 18:11:03,784 - INFO - Início da aplicação.
+2025-01-25 18:11:13,825 - INFO - Inicializando modelos.
+2025-01-25 18:11:24,571 - INFO - error_code=account_deactivated error_message='The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-01-25 18:11:24,571 - ERROR - Erro com ChatGPT: The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.
+2025-01-25 18:11:25,464 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-25 18:11:25,469 - WARNING - Fallback usado: Um navio é uma estrutura complexa que precisei dividar em suas principais partes para que possa entender como ele funciona.
+
+**Componentes principais**
+
+1. **Hull** (Casco): é o corpo do navio, que é responsável por sua estrutura e resistência ao tempo e às condições meteorológicas.
+2. **Propulsão**: é o sistema que permite ao navio se mover através da água. Existem dois principais tipos: sistema de propulsão a vapor e motor diesel.
+	* **Sistema de propulsão a vapor**: utiliza vapor gerado por uma caldeira para mover um eixo, que por sua vez impulsiona as hélices do navio.
+	* **Motor diesel**: utiliza um motor a combustível para impelir as hélices do navio.
+3. **Hélices**: são os dispositivos que movem a água para frente, criando a força que impulsiona o navio.
+4. **Retropropulsão**: é o sistema que permite governar o movimento do navio, permitindo que o capitão mude a direção do barco.
+5. **Estabilidade**: é o equilíbrio entre as forças que afetam o navio, como a resistência à substância e a resistência ao vento, para manter o barco estável.
+6. **Electrificação**: fornece energia para todos os sistemas do navio, incluindo as luzes, aparelhos de comunicação e sistemas eletrônicos.
+
+**Como funcionam**
+
+1. O navio é propulsado pelo seu sistema de propulsão, que gera uma força que movimenta as hélices.
+2. As hélices movem a água para frente, criando uma área de baixa pressão atrás das hélices e uma área de alta pressão à frente.
+3. A diferença de pressão cria uma força que impulsiona o navio para frente.
+4. O capitão regula a direção do navio ajustando a propulsão e a retropropulsão.
+5. O sistema de estabilidade é monitorado constantemente para garantir que o navio permaneça estável.
+6. O sistema de electrificação fornece energia para todos os sistemas do navio.
+
+Essa é a básica do funcionamento de um navio! (Erro: The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.)
