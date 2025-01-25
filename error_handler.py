@@ -28,10 +28,15 @@ def process_responses(strategy, chatgpt_response, llama_response, chatgpt_error,
     if chatgpt_response and llama_response:
         best_response = strategy.evaluate(chatgpt_response, llama_response)
         chosen_model = "ChatGPT" if best_response == chatgpt_response else "Llama3"
+        discarded_model = "Llama3" if chosen_model == "ChatGPT" else "ChatGPT"
+        discarded_response = llama_response if chosen_model == "ChatGPT" else chatgpt_response
+
         return {
             "status": "success",
             "response": best_response,
             "model": chosen_model,
+            "discarded_model": discarded_model,
+            "discarded_response": discarded_response,
             "error": None
         }
 

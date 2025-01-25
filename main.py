@@ -39,6 +39,13 @@ def display_response(model_name, response, explanation=None):
         panel_content += f"\n\n[dim]Explicação: {explanation}[/dim]"
     console.print(Panel(panel_content, title="Resposta Escolhida", style="green"))
 
+def display_discarded(model_name, response, explanation=None):
+    """Exibe a resposta escolhida."""
+    panel_content = f"[bold yellow]{model_name}[/bold yellow] respondeu:\n\n{response}"
+    if explanation:
+        panel_content += f"\n\n[dim]Explicação: {explanation}[/dim]"
+    console.print(Panel(panel_content, title="Resposta Descartada", style="bold dark_orange"))
+
 def display_error_table(chatgpt_error, llama_error):
     """Exibe erros em formato de tabela."""
     table = Table(title="Erros nas APIs", title_style="bold red")
@@ -78,6 +85,8 @@ def main():
         # Escolha da estratégia
         display_menu()
         strategy_choice = Prompt.ask("Digite o número da estratégia desejada", choices=["1", "2", "3"], default="1")
+        strategy_name = "LengthBasedStrategy: Mais Longo" if strategy_choice == "1" else "MostDirectStrategy: Mais Curto" if strategy_choice == "2" else "KeywordMatchStrategy: Palvras Chaves" if strategy_choice == "3" else None
+        logging.info(f"Estratégia escolhida: {strategy_name}")
 
         keywords = None
         if strategy_choice == "3":
@@ -105,8 +114,14 @@ def main():
 
             if result["status"] == "success":
                 observable.notify_observers(f"Resposta escolhida pelo modelo: {result['model']}")
-                display_response(result['model'], result['response'], explanation="Selecionado com base na estratégia escolhida.")
+                display_response(result['model'], result['response'], explanation=f"Selecionado com base na estratégia escolhida. ({strategy_name})")
                 logging.info(f"Resposta escolhida: {result['response']}")
+                
+                # Exibir a resposta descartada
+                discarded_model = result["discarded_model"]
+                discarded_response = result["discarded_response"]
+                display_discarded(discarded_model, discarded_response, explanation="Esta resposta foi descartada.")
+                logging.info(f"Resposta descartada: {discarded_response}")
 
             elif result["status"] == "fallback":
                 console.print(f"\n[bold yellow]Nota:[/bold yellow] Ocorreu um erro com outra API. Usando a resposta do {result['model']}.")
