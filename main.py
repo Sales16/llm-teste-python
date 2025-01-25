@@ -23,11 +23,14 @@ def setup_logger():
     )
 
 def display_menu():
-    """Exibe o menu principal."""
-    console.print(Panel.fit("[bold cyan]Bem-vindo ao Sistema de Avaliação de Modelos LLM[/bold cyan]", title="Menu Principal"))
-    console.print("[bold green]1.[/bold green] Resposta mais longa (padrão)")
-    console.print("[bold green]2.[/bold green] Resposta mais curta (direta)")
-    console.print("[bold green]3.[/bold green] Resposta com palavras-chave específicas")
+    """Exibe o menu principal em formato de tabela."""
+    table = Table(title="Menu Principal", title_style="bold cyan")
+    table.add_column("Opção", justify="center", style="bold green", no_wrap=True)
+    table.add_column("Descrição", justify="left", style="white")
+    table.add_row("1", "Resposta mais longa (padrão)")
+    table.add_row("2", "Resposta mais curta (direta)")
+    table.add_row("3", "Resposta com palavras-chave específicas")
+    console.print(table)
 
 def display_response(model_name, response, explanation=None):
     """Exibe a resposta escolhida."""
@@ -35,6 +38,17 @@ def display_response(model_name, response, explanation=None):
     if explanation:
         panel_content += f"\n\n[dim]Explicação: {explanation}[/dim]"
     console.print(Panel(panel_content, title="Resposta Escolhida", style="green"))
+
+def display_error_table(chatgpt_error, llama_error):
+    """Exibe erros em formato de tabela."""
+    table = Table(title="Erros nas APIs", title_style="bold red")
+    table.add_column("API", justify="center", style="bold yellow", no_wrap=True)
+    table.add_column("Erro", justify="left", style="white")
+    if chatgpt_error:
+        table.add_row("ChatGPT", chatgpt_error)
+    if llama_error:
+        table.add_row("Llama3", llama_error)
+    console.print(table)
 
 def main():
     setup_logger()
@@ -58,8 +72,8 @@ def main():
         observable.add_observer(observer)
 
         # Histórico de mensagens
-        chatgpt_history = [{"role": "system", "content": "Você é uma assistente virtual, responda apenas em português."}]
-        llama_history = [{"role": "system", "content": "Você é uma assistente virtual, responda apenas em português."}]
+        chatgpt_history = [{"role": "system", "content": "Você é um assistente virtual, responda apenas em português."}]
+        llama_history = [{"role": "system", "content": "Você é um assistente virtual, responda apenas em português."}]
 
         # Escolha da estratégia
         display_menu()
@@ -71,7 +85,7 @@ def main():
 
         strategy = StrategySelector.get_strategy(int(strategy_choice), keywords)
 
-        console.print("\n[bold cyan]Digite suas perguntas. Para sair, digite 'sair'.[/bold cyan]")
+        console.print("\n[bold cyan]Digite suas perguntas. Para sair, digite [SAIR].[/bold cyan]")
 
         while True:
             prompt = Prompt.ask("\n[bold blue]Você[/bold blue]")
@@ -96,13 +110,14 @@ def main():
 
             elif result["status"] == "fallback":
                 console.print(f"\n[bold yellow]Nota:[/bold yellow] Ocorreu um erro com outra API. Usando a resposta do {result['model']}.")
-                console.print(f"[bold red]Erro:[/bold red] {result['error']}")
+                display_error_table(chatgpt_error, llama_error)
                 display_response(result['model'], result['response'], explanation="Fallback foi utilizado.")
                 logging.warning(f"Fallback usado: {result['response']} (Erro: {result['error']})")
 
             else:
                 console.print("\n[bold red]Erro crítico:[/bold red] Nenhuma API retornou uma resposta.")
-                console.print(f"[bold red]Erro:[/bold red] {result['error']}")
+                display_error_table(chatgpt_error, llama_error)
+                console.print(f"[bold red]Erro crítico:[/bold red] {result['error']}")
                 logging.critical(f"Falha em ambas as APIs: {result['error']}")
 
     except Exception as critical_error:

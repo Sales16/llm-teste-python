@@ -86,3 +86,40 @@ Essa é a básica do funcionamento de um navio! (Erro: The OpenAI account associat
 2025-01-25 18:23:50,542 - ERROR - Erro ao executar QueryModelCommand: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
 2025-01-25 18:23:50,542 - ERROR - Erro com Llama3: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
 2025-01-25 18:23:50,545 - CRITICAL - Falha em ambas as APIs: Falha em ambas as APIs: ChatGPT (Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.), Llama3 (Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}})
+2025-01-25 18:26:21,855 - INFO - Início da aplicação.
+2025-01-25 18:26:24,415 - INFO - Inicializando modelos.
+2025-01-25 18:26:24,415 - INFO - ChatGPT inicializado com sucesso.
+2025-01-25 18:26:24,903 - INFO - Llama3 inicializado com sucesso.
+2025-01-25 18:28:00,997 - INFO - Início da aplicação.
+2025-01-25 18:28:18,361 - INFO - Inicializando modelos.
+2025-01-25 18:28:18,361 - INFO - ChatGPT inicializado com sucesso.
+2025-01-25 18:28:18,834 - INFO - Llama3 inicializado com sucesso.
+2025-01-25 18:28:29,599 - INFO - Comando QueryModelCommand criado com sucesso.
+2025-01-25 18:28:29,599 - INFO - Comando QueryModelCommand criado com sucesso.
+2025-01-25 18:28:29,599 - INFO - Executando comando QueryModelCommand.
+2025-01-25 18:28:30,275 - INFO - error_code=invalid_api_key error_message='Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-01-25 18:28:30,275 - ERROR - Erro ao obter resposta do ChatGPT: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:28:30,275 - ERROR - Erro ao executar QueryModelCommand: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:28:30,275 - ERROR - Erro com ChatGPT: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:28:30,275 - INFO - Executando comando QueryModelCommand.
+2025-01-25 18:28:30,660 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-25 18:28:30,663 - INFO - Resposta do Llama3 obtida com sucesso.
+2025-01-25 18:28:30,668 - WARNING - Fallback usado: Sou uma assistente virtual! Estou aqui para ajudar em qualquer dúvida ou necessidade que você tenha. Qual é o propósito do seu teste? (Erro: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.)
+2025-01-25 18:29:38,178 - INFO - Início da aplicação.
+2025-01-25 18:29:40,451 - INFO - Inicializando modelos.
+2025-01-25 18:29:40,451 - INFO - ChatGPT inicializado com sucesso.
+2025-01-25 18:29:40,923 - INFO - Llama3 inicializado com sucesso.
+2025-01-25 18:29:45,481 - INFO - Estratégia baseada em palavras-chave inicializada.
+2025-01-25 18:29:46,757 - INFO - Comando QueryModelCommand criado com sucesso.
+2025-01-25 18:29:46,757 - INFO - Comando QueryModelCommand criado com sucesso.
+2025-01-25 18:29:46,757 - INFO - Executando comando QueryModelCommand.
+2025-01-25 18:29:47,052 - INFO - error_code=invalid_api_key error_message='Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-01-25 18:29:47,052 - ERROR - Erro ao obter resposta do ChatGPT: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:29:47,052 - ERROR - Erro ao executar QueryModelCommand: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:29:47,052 - ERROR - Erro com ChatGPT: Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.
+2025-01-25 18:29:47,052 - INFO - Executando comando QueryModelCommand.
+2025-01-25 18:29:47,574 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-01-25 18:29:47,574 - ERROR - Erro ao obter resposta do Llama3: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+2025-01-25 18:29:47,574 - ERROR - Erro ao executar QueryModelCommand: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+2025-01-25 18:29:47,574 - ERROR - Erro com Llama3: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}
+2025-01-25 18:29:47,580 - CRITICAL - Falha em ambas as APIs: Falha em ambas as APIs: ChatGPT (Incorrect API key provided: 123. You can find your API key at https://platform.openai.com/account/api-keys.), Llama3 (Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}})
