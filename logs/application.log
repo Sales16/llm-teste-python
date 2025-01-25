@@ -9,3 +9,14 @@
 2025-01-25 17:57:06,232 - INFO - Inicializando modelos.
 2025-01-25 17:57:17,103 - INFO - error_code=account_deactivated error_message='The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
 2025-01-25 17:57:17,104 - ERROR - Erro: The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.
+2025-01-25 18:03:24,884 - INFO - Início da aplicação.
+2025-01-25 18:03:36,503 - INFO - Inicializando modelos.
+2025-01-25 18:03:47,439 - INFO - error_code=account_deactivated error_message='The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.' error_param=None error_type=invalid_request_error message='OpenAI API error received' stream_error=False
+2025-01-25 18:03:47,439 - ERROR - Erro com ChatGPT: The OpenAI account associated with this API key has been deactivated. If you are the developer for this OpenAI app, please check your email for more information. If you are seeing this error while using another app or site, please reach out to them for more help.
+2025-01-25 18:03:48,238 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-01-25 18:03:48,242 - WARNING - Erro com ChatGPT. Resposta do Llama3 usada: Uma raquete elétrica, também conhecida como raquete de detecção de falhas, é um dispositivo elétrico destinado a detectar e localizar falhas ou defeitos em sistemas elétricos, como geradores, transformadores, motores, circuitos impressos e linhas de transmissão.
+
+A raquete elétrica é uma ferramenta básica para os engenheiros e técnicos que trabalham com sistemas elétricos, pois permite detectar rapidamente e com precisão problemas causados por fios quebrados, fios soltos, contactos desajustados, falhas em componentes elétricos e outras causas de falha.
+
+A raquete elétrica é composta por um cabo flexível com um terminal na ponta que é usado para fazer contato com o circuito elétrico e detectar a presença de corrente elétrica. Quando a raquete é aproximada de um circuito elétrico funcionando normalmente, não detecta nada. Mas quando encontra uma falha ou defeito, a raquete sinaliza a presença da corrente elétrica com um leve toque ou um aviso sonoro, indicando a localização da falha.
+2025-01-25 18:04:17,297 - INFO - Usuário encerrou o chat.
